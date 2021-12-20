@@ -4,7 +4,7 @@ For steps on how to work with this repository [please see here](https://docs.lab
 
 🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your first Pull-Request is merged. This is intended to be a guideline. Feel free to add your own flare to it.
 
-# african-marketplace
+# african-marketplace-2
 
 
 
@@ -125,38 +125,3 @@ Remember that this project is licensed under the MIT license, and by submitting 
 - Ensure that your code conforms to our existing code conventions and test coverage.
 - Include the relevant issue number, if applicable.
 - You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
- 
-
-## Unit 2
-
-# To begin building a component
-
-make sure you are on the main branch for the first pull. it's okay if this doesn't "do anything".
- - $ git branch// make sure you're working on main 
-
- - $ git pull origin main // make sure your local main branch is up to date
-
- - $ git checkout -b <the name of the component you are working on & your first name>
-  --- example: - $ git checkout -b login-form-phil
-
-// now you are working on your own branch
-
-# When you want to submit your changes
- - $ git add .
- - $ git commit -m "< describe last change made >
- 
-Navigate to main
- - $ git checkout main             
- 
-Pull the latest main 
-- $ git pull origin main
-
-Navigate to branch to make sure it's got the most up to date changes from main
- - $ git checkout < your branch name>
- - $ git merge main
-
-Make sure your component still works
-Push to your branch
- - $ git push origin < your branch name>
-
- Submit a pull request to main on GitHub.com

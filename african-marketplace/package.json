@@ -1,8 +1,9 @@
 {
-  "name": "african-marketplace",
+  "name": "african-marketplace-2",
   "version": "0.1.0",
   "private": false,
   "license": "MIT",
+  "repository": "github:Lambda-School-Labs/african-marketplace-2",
   "dependencies": {
     "@craco/craco": "^5.6.4",
     "axios": "^0.19.2",
