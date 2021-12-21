@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import OwnerLogin from '../../OwnerLogin';
+import OwnerAddItem from '../../OwnerAddItem';
+import ItemsList from '../../ItemsList';
 
 function RenderLandingPage(props) {
   return (
@@ -14,6 +17,9 @@ function RenderLandingPage(props) {
           <Link to="/example-list">Example List of Items</Link>
         </p>
       </div>
+      <OwnerLogin />
+      <OwnerAddItem />
+      <ItemsList />
     </div>
   );
 }
