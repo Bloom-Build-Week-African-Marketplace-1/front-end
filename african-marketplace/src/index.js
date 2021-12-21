@@ -7,6 +7,8 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import '../src/styles.css';
+
 import { NotFoundPage } from './components/pages/NotFound';
 import { ExampleListPage } from './components/pages/ExampleList';
 import { LandingPage } from './components/pages/Landing';
@@ -30,16 +32,10 @@ function App() {
     <Switch>
       <Route path="/landing" component={LandingPage} />
       {/* any of the routes you need secured should be registered as SecureRoutes */}
-      <Route
-        path="/"
-        exact
-        component={() => <LandingPage />}
-      />
+      <Route path="/" exact component={() => <LandingPage />} />
       <Route path="/example-list" component={ExampleListPage} />
-      
-      
+
       <Route component={NotFoundPage} />
     </Switch>
-    
   );
 }

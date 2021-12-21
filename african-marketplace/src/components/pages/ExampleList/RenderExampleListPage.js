@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const RenderExampleListPage = props => (
-  <div>
+  <div className="main-list">
     {props.data.map(item => (
       <figure key={item.id}>
-        <img src={item.thumbnailUrl} alt={item.title} />
+        <div className="image-price">
+          <img src={item.thumbnailUrl} alt={item.title} />
+          <p>$5.99</p>
+        </div>
         <figcaption>
           <h3>{item.title}</h3>
         </figcaption>
