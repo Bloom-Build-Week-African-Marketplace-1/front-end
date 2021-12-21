@@ -11,7 +11,10 @@ const List = ({ LoadingComponent, RenderItems, getItemsData }) => {
   useEffect(() => {
     // Here we are performing our GET request through the use of our
     // Axios helper function that we will receive through props
-    getItemsData()
+  
+      axios
+        .get(`https://jsonplaceholder.typicode.com/photos?albumId=1`)
+        .then(response => response.data);
       .then(items => {
         setItems(items);
       })
