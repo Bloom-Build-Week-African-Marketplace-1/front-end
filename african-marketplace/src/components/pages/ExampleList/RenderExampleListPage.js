@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SearchBar from './SearchBar';
+// import SearchBar from '../../SearchBar';
 
 const RenderExampleListPage = props => (
   <div>
-    <SearchBar />
+    {/* <SearchBar /> */}
     <div className="main-list">
       {props.data.map(item => (
         <figure key={item.id}>
