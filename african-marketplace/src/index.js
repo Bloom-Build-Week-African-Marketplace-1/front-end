@@ -7,13 +7,20 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import '../src/styles.css';
+
 import { NotFoundPage } from './components/pages/NotFound';
 import { ExampleListPage } from './components/pages/ExampleList';
 import { LandingPage } from './components/pages/Landing';
 import { LoadingComponent } from './components/common';
+<<<<<<< HEAD
 import OwnerLogin from '../../OwnerLogin';
 import OwnerAddItem from '../../OwnerAddItem';
 import {ItemsList} from '../../ItemsList';
+=======
+import ItemsList from './components/ItemsList';
+
+>>>>>>> main
 ReactDOM.render(
   <Router>
     <React.StrictMode>
