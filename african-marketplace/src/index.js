@@ -7,10 +7,13 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import '../src/styles.css';
+
 import { NotFoundPage } from './components/pages/NotFound';
 import { ExampleListPage } from './components/pages/ExampleList';
 import { LandingPage } from './components/pages/Landing';
 import { LoadingComponent } from './components/common';
+import ItemsList from './components/ItemsList';
 
 ReactDOM.render(
   <Router>
@@ -30,16 +33,10 @@ function App() {
     <Switch>
       <Route path="/landing" component={LandingPage} />
       {/* any of the routes you need secured should be registered as SecureRoutes */}
-      <Route
-        path="/"
-        exact
-        component={() => <LandingPage />}
-      />
-      <Route path="/example-list" component={ExampleListPage} />
-      
-      
+      <Route path="/" exact component={() => <LandingPage />} />
+      <Route path="/shop" component={ItemsList} />
+
       <Route component={NotFoundPage} />
     </Switch>
-    
   );
 }
