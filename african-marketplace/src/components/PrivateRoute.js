@@ -1,7 +1,8 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 
-const PrivateRoute = (props) => {
-    const token =localStorage.getData('token');
+export const PrivateRoute = (props) => {
+    const token = localStorage.getItem('token');
     const {component: Component, ...rest} = props;
     return( 
     <>

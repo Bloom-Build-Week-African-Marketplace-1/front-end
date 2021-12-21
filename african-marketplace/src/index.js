@@ -5,22 +5,22 @@ import {
   Route,
   useHistory,
   Switch,
+  Link
 } from 'react-router-dom';
 
 import '../src/styles.css';
 
 import { NotFoundPage } from './components/pages/NotFound';
-import { ExampleListPage } from './components/pages/ExampleList';
+import { PrivateRoute } from './components/PrivateRoute';
 import { LandingPage } from './components/pages/Landing';
 import { LoadingComponent } from './components/common';
-<<<<<<< HEAD
-import OwnerLogin from '../../OwnerLogin';
-import OwnerAddItem from '../../OwnerAddItem';
-import {ItemsList} from '../../ItemsList';
-=======
+
+import RegisterOwner from './components/RegisterOwner';
+import OwnerLogin from './components/OwnerLogin';
+import OwnerAddItem from './components/OwnerAddItem';
+
 import ItemsList from './components/ItemsList';
 
->>>>>>> main
 ReactDOM.render(
   <Router>
     <React.StrictMode>
@@ -33,27 +33,32 @@ ReactDOM.render(
 function App() {
   // The reason to declare App this way is so that we can use any helper functions we'd need for business logic, in our case auth.
   // React Router has a nifty useHistory hook we can use at this level to ensure we have security around our routes.
-  const history = useHistory();
+  const {push} = useHistory();
 
+  const handleClickLogout = () => {
+    localStorage.removeItem('token');
+    push('/');
+  }
   return (<>
   <div>
     <Link to="/login">Owner Login</Link>
     <Link to="/shop">Shop!</Link>
-    <Link to="/logout">Logout</Link>
+    <button onClick={handleClickLogout}>Logout</button>
   </div>
-    <Switch>
-      <Route exact path="/landing" component={LandingPage} />
+
+       <Route exact path="/" component={LandingPage} />
       {/* any of the routes you need secured should be registered as PrivateRoutes */}
 
       <Route  path="/login" component={OwnerLogin}/>
-      <PrivateRoute path="/owner" component={OwnerAddItem} />
-      <PrivateRoute path="/owner" owner={true} component={ItemsList} />
+      
+      <Route  path="/register" component={RegisterOwner}/>
+      <PrivateRoute path="/shop/owner" component={OwnerAddItem} />
+      <PrivateRoute path="/shop/owner" owner={true} component={ItemsList} />
       <Route path="/shop" component={ItemsList} />
      
       
       
-      <Route component={NotFoundPage} />
-    </Switch>
+      {/* <Route component={NotFoundPage} /> */}
     </>
   );
 }
