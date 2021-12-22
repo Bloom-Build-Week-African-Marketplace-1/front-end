@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosWithAuth from '../utils/axiosWithAuth';
 import API_URL from '../constants';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 
 const OwnerAddItem = () => {
   const initialItemInfo = {
-    name: '',
+    category: '',
     description: '',
-    price: '',
     location: '',
+    name: '',
+    price: 0,
+    user_id: 0,
   };
 
   const initialIsAddingItem = false;
@@ -16,31 +18,48 @@ const OwnerAddItem = () => {
   const [itemInfo, setItemInfo] = useState(initialItemInfo);
   const [isAddingItem, setIsAddingItem] = useState(initialIsAddingItem);
 
+  useEffect(() => {
+    setItemInfo({ ...itemInfo, user_id: localStorage.getItem('user_id') });
+  }, [isAddingItem]);
+
   const { push } = useHistory();
+
   const handleChange = e => {
     setItemInfo({
       ...itemInfo,
       [e.target.name]: e.target.value,
     });
   };
+
   const handleClickAdd = e => {
     e.preventDefault();
     setIsAddingItem(true);
   };
+
   const handleSubmit = e => {
     e.preventDefault();
-    // axios.post(`${API_URL}auth/item`, itemInfo)
-    // .then( resp => {
-    //     const token = resp.data.token;
-
+    axiosWithAuth
+      .post(`${API_URL}items`, itemInfo)
+      .then(resp => console.log(resp))
+      .catch(err => console.error(err));
     setIsAddingItem(false);
-    // })
-    // .catch( err => console.error(err))
   };
+
   const handleCancel = e => {
     e.preventDefault();
 
     setIsAddingItem(false);
+  };
+
+  const selectCategory = async e => {
+    setItemInfo(getNewCategory(e));
+  };
+
+  const getNewCategory = e => {
+    const newItemInfo = { ...itemInfo };
+    newItemInfo.category = e.target.value;
+    console.log(newItemInfo);
+    return newItemInfo;
   };
 
   return (
@@ -48,9 +67,9 @@ const OwnerAddItem = () => {
       {!isAddingItem && <button onClick={handleClickAdd}>Add New Item</button>}
       {isAddingItem && (
         <div>
-          <p>
-            <h2>ADD AN ITEM</h2> <button onClick={handleCancel}>X</button>
-          </p>
+          <h2>ADD AN ITEM</h2>
+          <button onClick={handleCancel}>X</button>
+
           <form onSubmit={handleSubmit}>
             <label>
               PRODUCT NAME
@@ -71,13 +90,14 @@ const OwnerAddItem = () => {
                 name="description"
               />
             </label>
+
             <label>
               PRICE
               <input
                 type="text"
                 value={itemInfo.price}
                 onChange={handleChange}
-                name="name"
+                name="price"
               />
             </label>
 
@@ -87,10 +107,34 @@ const OwnerAddItem = () => {
                 type="text"
                 value={itemInfo.location}
                 onChange={handleChange}
-                name="description"
+                name="location"
               />
             </label>
-
+            <label>
+              CATEGORY
+              <select
+                id={itemInfo.category}
+                onChange={selectCategory}
+                name={itemInfo.category}
+                value={itemInfo.category}
+              >
+                <option name="category" value="0">
+                  SELECT CATEGORY:
+                </option>
+                <option name="housewares" value="housewares">
+                  HOUSEWARES
+                </option>
+                <option name="furniture" value="furniture">
+                  FURNITURE
+                </option>
+                <option name="food" value="food">
+                  FOOD
+                </option>
+                <option name="apparel" value="apparel">
+                  APPAREL
+                </option>
+              </select>
+            </label>
             <input type="submit" value="SUBMIT" />
           </form>
 

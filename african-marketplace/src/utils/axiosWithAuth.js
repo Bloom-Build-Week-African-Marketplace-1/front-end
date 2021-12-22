@@ -3,7 +3,7 @@ import API_URL from '../constants.js';
 
 // A axios calls to protected data
 
-const AxiosWithAuth = axios.create({
+const axiosWithAuth = axios.create({
   baseURL: API_URL,
   headers: {
     Authorization:
@@ -24,4 +24,4 @@ const AxiosWithAuth = axios.create({
 //       .catch(error => console.log(error));
 //   }, []);
 
-export default AxiosWithAuth;
+export default axiosWithAuth;

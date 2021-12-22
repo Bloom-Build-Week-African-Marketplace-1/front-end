@@ -23,6 +23,7 @@ const RegisterOwner = () => {
     axios
       .post(`${API_URL}auth/register`, credentials)
       .then(resp => {
+        console.log(resp);
         const password = resp.data.password;
         localStorage.setItem('password', password);
         push('/login');

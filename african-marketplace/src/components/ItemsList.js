@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import AxiosWithAuth from '../utils/AxiosWithAuth';
+import axiosWithAuth from '../utils/axiosWithAuth';
+
 const ItemsList = props => {
   const initialState = [
     {
@@ -16,7 +17,8 @@ const ItemsList = props => {
   const [items, setItems] = useState(initialState);
 
   useEffect(() => {
-    AxiosWithAuth.get(`items`)
+    axiosWithAuth
+      .get(`items`)
       .then(res => setItems(res.data))
       .catch(err => console.error(err));
   }, []);

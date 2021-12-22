@@ -20,16 +20,19 @@ const OwnerLogin = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    let token = '';
-    token = await getToken();
-    localStorage.setItem('token', token);
+    let data = '';
+    data = await getUserData();
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('user_id', data.user_id);
+    //localStorage.setItem('userID', token);
   };
 
-  const getToken = () => {
+  const getUserData = () => {
     return axios
       .post(`${API_URL}auth/login`, state)
       .then(resp => {
-        return resp.data.token;
+        console.log(resp);
+        return resp.data;
       })
       .catch(err => console.error(err));
   };
