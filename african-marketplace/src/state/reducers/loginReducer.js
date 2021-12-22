@@ -1,28 +1,42 @@
-import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from "../actions";
+import { LOGIN_START, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from "../actions";
 
 const initialState = {
-    isLoggedIn: false,
+    credentials: {
+        email: '',
+        password: '',
+    },
+    loggingIn: false,
     loginError: '',
 };
 
 const loginReducer = (state = initialState, action) => {
     switch (action.type) {
+        case (LOGIN_START):
+                return ({
+                    ...state,
+                    credentials: {},
+                    loggingIn: true,
+                    loginError: '',
+                });
         case (LOGIN_SUCCESS):
                 return ({
                     ...state,
-                    isLoggedIn: true,
+                    credentials: action.payload,
+                    loggingIn: false,
                     loginError: '',
                 });
             case (LOGIN_FAIL):
                 return ({
                     ...state,
-                    isLoggedIn: false,
+                    credentials: {},
+                    loggingIn: false,
                     loginError: action.payload,
                 });
             case (LOGOUT):
                 return ({
                     ...state,
-                    isLoggedIn: false,
+                    credentials: {},
+                    loggingIn: false,
                     loginError: '',
                 });
             default:
