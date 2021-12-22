@@ -33,6 +33,8 @@ function App() {
 
   const handleClickLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('password');
+    localStorage.removeItem('user_id');
     push('/');
   };
   return (
