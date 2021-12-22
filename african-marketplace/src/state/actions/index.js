@@ -11,6 +11,10 @@ export const ITEM_SUCCEES = 'ITEM_SUCCESS';
 export const ITEM_ERROR = 'ITEM_ERROR';
 export const ITEM_ADD = 'ITEM_ADD';
 
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGOUT = 'LOGOUT';
+
 export const fetchItems = () => {
     return (dispatch) => {
         axiosWithAuth()
@@ -33,4 +37,8 @@ export const addItem = (newItem) => {
 
 export const setError = (err) => {
     return ({type: ITEM_ERROR, payload: err});
+};
+
+export const loginFail = (err) => {
+    return ({type: LOGIN_FAIL, payload: err});
 };
