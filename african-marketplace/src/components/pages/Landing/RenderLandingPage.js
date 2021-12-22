@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import OwnerLogin from '../../OwnerLogin';
-import OwnerAddItem from '../../OwnerAddItem';
-import ItemsList from '../../ItemsList';
 
 function RenderLandingPage(props) {
   return (
     <div>
-      <h1>Welcome to Labs Basic SPA</h1>
+      <h1>Africa Locally Owned Sales</h1>
+      <h3>Where local products thrive with competitive prices.</h3>
       <div>
+        <button>
+          <Link to="/shop">Shop!</Link>
+        </button>
+        <p>Browse our listings of excellent local products.</p>
+        <hr />
+        <button>
+          <Link to="/login">Owner Login</Link>
+        </button>
         <p>
-          This is an example of how we'd like for you to approach page/routable
-          components.
-        </p>
-        <p>
-          <Link to="/example-list">Example List of Items</Link>
+          Owners log in to compare prices, add items, and review your listings.
         </p>
       </div>
-      <OwnerLogin />
-      <OwnerAddItem />
-      <ItemsList />
     </div>
   );
 }

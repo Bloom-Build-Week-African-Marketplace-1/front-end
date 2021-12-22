@@ -4,16 +4,18 @@ import {
   BrowserRouter as Router,
   Route,
   useHistory,
-  Switch,
+  Link,
 } from 'react-router-dom';
 
 import '../src/styles.css';
 
-import { NotFoundPage } from './components/pages/NotFound';
-import { ExampleListPage } from './components/pages/ExampleList';
 import { LandingPage } from './components/pages/Landing';
 import { LoadingComponent } from './components/common';
 import ItemsList from './components/ItemsList';
+import RegisterOwner from './components/RegisterOwner';
+import OwnerLogin from './components/OwnerLogin';
+import { PrivateRoute } from './components/PrivateRoute';
+import OwnerAddItem from './components/OwnerAddItem';
 
 ReactDOM.render(
   <Router>
@@ -27,16 +29,28 @@ ReactDOM.render(
 function App() {
   // The reason to declare App this way is so that we can use any helper functions we'd need for business logic, in our case auth.
   // React Router has a nifty useHistory hook we can use at this level to ensure we have security around our routes.
-  const history = useHistory();
+  const { push } = useHistory();
 
+  const handleClickLogout = () => {
+    localStorage.removeItem('token');
+    push('/');
+  };
   return (
-    <Switch>
-      <Route path="/landing" component={LandingPage} />
-      {/* any of the routes you need secured should be registered as SecureRoutes */}
-      <Route path="/" exact component={() => <LandingPage />} />
-      <Route path="/shop" component={ItemsList} />
+    <>
+      <div>
+        <Link to="/login">Owner Login</Link>
+        <Link to="/shop">Shop!</Link>
+        <button onClick={handleClickLogout}>Logout</button>
+      </div>
 
-      <Route component={NotFoundPage} />
-    </Switch>
+      <Route exact path="/" component={LandingPage} />
+      {/* any of the routes you need secured should be registered as PrivateRoutes */}
+      <Route path="/login" component={OwnerLogin} />
+
+      <Route path="/register" component={RegisterOwner} />
+      <PrivateRoute path="/shop/owner" component={OwnerAddItem} />
+      <PrivateRoute path="/shop/owner" component={ItemsList} />
+      <Route path="/shop" component={ItemsList} />
+    </>
   );
 }
