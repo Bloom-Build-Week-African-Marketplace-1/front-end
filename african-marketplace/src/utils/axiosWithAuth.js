@@ -1,27 +1,17 @@
 import axios from 'axios';
-import API_URL from '../constants.js'
-
-
-
-
-
-const getAuthHeader = authState => {
-    if (!localStorage.getItem('token')) {
-      throw new Error('Not authenticated');
-    }
-    return { Authorization: localStorage.getItem('token') };
-};
-
-
+import API_URL from '../constants.js';
 
 // A axios calls to protected data
 
-const axiosWithAuth = axios.create({
-    baseURL: 'https://some-domain.com/api/',
-    timeout: 1000,
-    headers: getAuthHeader()
-  });
-
+const AxiosWithAuth = axios.create({
+  baseURL: API_URL,
+  headers: {
+    Authorization:
+      typeof localStorage.getItem('token') === 'string'
+        ? localStorage.getItem('token')
+        : '',
+  },
+});
 
 // at '/owner'  load in the owner's items
 // useEffect(() => {
@@ -34,7 +24,4 @@ const axiosWithAuth = axios.create({
 //       .catch(error => console.log(error));
 //   }, []);
 
-
-
-
-export default axiosWithAuth;
+export default AxiosWithAuth;

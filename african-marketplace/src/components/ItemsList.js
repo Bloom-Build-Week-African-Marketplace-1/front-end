@@ -1,45 +1,25 @@
-import React, { useState } from 'react';
-import Item from './Item';
-
+import React, { useState, useEffect } from 'react';
+import AxiosWithAuth from '../utils/AxiosWithAuth';
 const ItemsList = props => {
-  const items = [
+  const initialState = [
     {
-      id: 1,
-      thumbnailUrl: `https://picsum.photos/200/300`,
-      title: 'item 1',
-      price: '$5.99',
-    },
-    {
-      id: 2,
-      thumbnailUrl: `https://picsum.photos/200/300`,
-      title: 'item 2',
-      price: '$20',
-    },
-    {
-      id: 1,
-      thumbnailUrl: `https://picsum.photos/200/300`,
-      title: 'item 1',
-      price: '$5.99',
-    },
-    {
-      id: 2,
-      thumbnailUrl: `https://picsum.photos/200/300`,
-      title: 'item 2',
-      price: '$20',
-    },
-    {
-      id: 1,
-      thumbnailUrl: `https://picsum.photos/200/300`,
-      title: 'item 1',
-      price: '$5.99',
-    },
-    {
-      id: 2,
-      thumbnailUrl: `https://picsum.photos/200/300`,
-      title: 'item 2',
-      price: '$20',
+      category: '',
+      description: '',
+      item_id: 0,
+      location: '',
+      name: '',
+      price: 0,
+      user_id: 0,
     },
   ];
+
+  const [items, setItems] = useState(initialState);
+
+  useEffect(() => {
+    AxiosWithAuth.get(`items`)
+      .then(res => setItems(res.data))
+      .catch(err => console.error(err));
+  }, []);
 
   return (
     <div>

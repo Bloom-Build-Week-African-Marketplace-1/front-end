@@ -1,71 +1,76 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import API_URL from '../constants';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 
-
 const OwnerLogin = () => {
-  const initialCredentials = {
+  const initialState = {
     username: '',
-    password: ''
-  }
+    password: '',
+  };
 
-  console.log(typeof localStorage.getItem('token'));
-  const initialIsLoggedIn = (typeof localStorage.getItem('token') === 'string');
-  const [credentials, setCredentials] = useState(initialCredentials);
-  const [isLoggedIn, setIsLoggedIn] = useState(initialIsLoggedIn);
+  const [state, setState] = useState(initialState);
 
-
-  const handleChange = (e)=> {
-    
-    setCredentials({
-      ...credentials,
+  const handleChange = e => {
+    setState({
+      ...state,
       [e.target.name]: e.target.value,
-    })
+    });
+  };
 
-    console.log(credentials);
-  }
-  const {push} = useHistory();
+  const handleSubmit = async e => {
+    e.preventDefault();
+    let token = '';
+    token = await getToken();
+    localStorage.setItem('token', token);
+  };
 
-   const handleSubmit = (e)=> { 
-       e.preventDefault();
-        axios.post(`${API_URL}auth/login`, credentials)
-        .then( resp => {
-            const token = resp.data.token;
-            localStorage.setItem('token', token);
-            setIsLoggedIn((typeof localStorage.getItem('token') === 'string'));
-        })
-        .catch( err => console.error(err))
-    }       
-    
-    
-  return( 
+  const getToken = () => {
+    return axios
+      .post(`${API_URL}auth/login`, state)
+      .then(resp => {
+        return resp.data.token;
+      })
+      .catch(err => console.error(err));
+  };
+
+  return (
     <div>
-      { (!isLoggedIn) &&
-          <div>
-           
-            <h2>LOGIN</h2>
-            <form  onSubmit={handleSubmit} >
-                <label>
-                    USERNAME
-                    <input type='text' value={credentials.username} onChange={handleChange} name='username' />
-                </label>
-    
-                <label>
-                    PASSWORD
-                    <input type='text' value={credentials.password} onChange={handleChange} name='password' />
-                </label>
-    
-                <input type="submit" value="SUBMIT" />
-            </form>
-            
-        <Link to='/register' >Register New Owner</Link>
+      {typeof localStorage.getItem('token') !== 'string' && (
+        <div>
+          <h2>LOGIN</h2>
+          <form onSubmit={handleSubmit}>
+            <label>
+              USERNAME
+              <input
+                type="text"
+                value={state.username}
+                onChange={handleChange}
+                name="username"
+              />
+            </label>
+
+            <label>
+              PASSWORD
+              <input
+                type="text"
+                value={state.password}
+                onChange={handleChange}
+                name="password"
+              />
+            </label>
+
+            <input type="submit" value="SUBMIT" />
+          </form>
+
+          <Link to="/register">Register New Owner</Link>
         </div>
-      }  
-       { (isLoggedIn) && <Redirect to='/shop/owner' />}
+      )}
+      {typeof localStorage.getItem('token') === 'string' && (
+        <Redirect to="/shop/owner" />
+      )}
     </div>
-  )
- 
-}
+  );
+};
 
 export default OwnerLogin;
