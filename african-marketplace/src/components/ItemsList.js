@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import API_URL from '../constants';
-import axiosWithAuth from '../utils/axiosWithAuth';
+import React, { useEffect } from 'react';
 
 // Redux imports
 import { connect } from 'react-redux';
@@ -54,7 +52,7 @@ const ItemsList = props => {
         {items.map(item => (
           <figure key={item.item_id}>
             <div className="image-price">
-              <img src={item.thumbnailUrl} alt={item.title} />
+              <img src={item.url} alt={item.name} />
               <p>${item.price}</p>
             </div>
             <figcaption>

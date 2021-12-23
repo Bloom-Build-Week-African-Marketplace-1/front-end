@@ -1,7 +1,7 @@
 // import all of your reducers into this file, and export them back out.
 // This allows for the simplification of flow when importing reducers into your actions throughout your app.
 
-import { ITEM_START, ITEM_SUCCESS, ITEM_ERROR, ITEM_ADD } from '../actions';
+import { ITEM_START, ITEM_SUCCESS, FETCH_ERROR, ITEM_ADD } from '../actions';
 
 export const initialState = {
   items: [
@@ -17,7 +17,7 @@ export const initialState = {
     },
   ],
   isLoading: false,
-  itemError: '',
+  fetchingError: '',
 };
 
 const itemReducer = (state = initialState, action) => {
@@ -27,32 +27,26 @@ const itemReducer = (state = initialState, action) => {
         ...state,
         items: [],
         isLoading: true,
-        itemError: '',
+        fetchingError: '',
       };
     case ITEM_SUCCESS:
       return {
         ...state,
         items: action.payload,
         isLoading: false,
-        itemError: '',
+        fetchingError: '',
       };
-    case ITEM_ERROR:
+    case FETCH_ERROR:
       return {
         ...state,
         items: [],
         isLoading: false,
-        itemError: action.payload,
+        fetchingError: action.payload,
       };
     case ITEM_ADD:
-      const newItem = {
-        id: '###',
-        item: action.payload,
-        category: action.payload,
-        location: action.payload,
-      };
       return {
         ...state,
-        items: [...state.items, newItem],
+        items: [...state.items, action.payload],
       };
     default:
       return state;

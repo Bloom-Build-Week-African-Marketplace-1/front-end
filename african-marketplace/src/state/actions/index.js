@@ -8,7 +8,7 @@ import axiosWithAuth from '../../utils/axiosWithAuth';
 
 export const ITEM_START = 'ITEM_START';
 export const ITEM_SUCCESS = 'ITEM_SUCCESS';
-export const ITEM_ERROR = 'ITEM_ERROR';
+export const FETCH_ERROR = 'FETCH_ERROR';
 export const ITEM_ADD = 'ITEM_ADD';
 
 export const LOGIN_START = 'LOGIN_START';
@@ -26,8 +26,8 @@ export const fetchItems = () => {
         dispatch({ type: ITEM_SUCCESS, payload: resp.data });
       })
       .catch(err => {
-        // dispatch ({type: ITEM_ERROR, payload: (err)});
-        dispatch({ type: ITEM_ERROR, payload: err });
+        // dispatch ({type: FETCH_ERROR, payload: (err)});
+        dispatch({ type: FETCH_ERROR, payload: err });
       });
   };
 };
@@ -40,7 +40,7 @@ export const addItem = newItem => {
 };
 
 export const setError = err => {
-  return { type: ITEM_ERROR, payload: err };
+  return { type: FETCH_ERROR, payload: err };
 };
 
 export const getLogin = () => {
