@@ -1,5 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducer from './state/reducers';
+
 import {
   BrowserRouter as Router,
   Route,
@@ -17,10 +23,14 @@ import OwnerLogin from './components/OwnerLogin';
 import { PrivateRoute } from './components/PrivateRoute';
 import OwnerAddItem from './components/OwnerAddItem';
 
+const store = createStore(reducer, applyMiddleware(thunk));
+
 ReactDOM.render(
   <Router>
     <React.StrictMode>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </React.StrictMode>
   </Router>,
   document.getElementById('root')
@@ -33,6 +43,8 @@ function App() {
 
   const handleClickLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('password');
+    localStorage.removeItem('user_id');
     push('/');
   };
   return (

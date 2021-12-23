@@ -18,13 +18,15 @@ const OwnerLogin = () => {
     });
   };
 
+  const { push } = useHistory();
+
   const handleSubmit = async e => {
     e.preventDefault();
     let data = '';
     data = await getUserData();
     localStorage.setItem('token', data.token);
     localStorage.setItem('user_id', data.user_id);
-    //localStorage.setItem('userID', token);
+    push('/shop/owner');
   };
 
   const getUserData = () => {
