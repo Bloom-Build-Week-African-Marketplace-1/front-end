@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_URL from '../constants';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import OwnerEditItem from './OwnerEditItem';
 
@@ -21,8 +22,11 @@ const ItemsList = props => {
 
   const getItems = () => {
     axiosWithAuth
-      .get(`items`)
-      .then(res => setItems(res.data))
+      .get(`${API_URL}items`)
+      .then(res => {
+        setItems(res.data);
+        console.log(res.data);
+      })
       .catch(err => console.error(err));
   };
 
@@ -44,7 +48,7 @@ const ItemsList = props => {
   };
   return (
     <>
-      <div>
+      <div className="list-container">
         <div className="main-list">
           {items
             .filter(
@@ -68,7 +72,7 @@ const ItemsList = props => {
             ))}
         </div>
       </div>
-      <div>
+      <div className="list-container">
         <div className="main-list">
           {items
             .filter(
