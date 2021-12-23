@@ -38,9 +38,9 @@ const OwnerLogin = () => {
   };
 
   return (
-    <div>
+    <div className="log-in-container">
       {typeof localStorage.getItem('token') !== 'string' && (
-        <div>
+        <div className="owner-log-in-card">
           <h2>LOGIN</h2>
           <form onSubmit={handleSubmit}>
             <label>
@@ -56,16 +56,16 @@ const OwnerLogin = () => {
             <label>
               PASSWORD
               <input
-                type="text"
+                type="password"
                 value={state.password}
                 onChange={handleChange}
                 name="password"
               />
             </label>
 
-            <input type="submit" value="SUBMIT" />
+            <input type="submit" value="Log-In" id="submit-button"></input>
           </form>
-
+          <p>Don't have an account?</p>
           <Link to="/register">Register New Owner</Link>
         </div>
       )}

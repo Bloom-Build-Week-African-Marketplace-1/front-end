@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import API_URL from '../constants';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import axios from 'axios';
 
 const ItemsList = props => {
   const initialState = [
@@ -19,8 +20,11 @@ const ItemsList = props => {
 
   useEffect(() => {
     axiosWithAuth
-      .get(`https://jsonplaceholder.typicode.com/photos?albumId=1`)
-      .then(res => setItems(res.data))
+      .get(`${API_URL}items`)
+      .then(res => {
+        setItems(res.data);
+        console.log(res.data);
+      })
       .catch(err => console.error(err));
   }, []);
 
@@ -28,13 +32,13 @@ const ItemsList = props => {
     <div className="list-container">
       <div className="main-list">
         {items.map(item => (
-          <figure key={item.id}>
+          <figure key={item.item_id}>
             <div className="image-price">
               <img src={item.thumbnailUrl} alt={item.title} />
-              <p>{item.price}</p>
+              <p>${item.price}</p>
             </div>
             <figcaption>
-              <h3>{item.title}</h3>
+              <h3>{item.name}</h3>
             </figcaption>
           </figure>
         ))}

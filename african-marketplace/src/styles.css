@@ -1,8 +1,13 @@
 /* Example List Styling */
 
+.list-container{
+  width: 100%;
+  height: 100vh;
+}
+
 .main-list {
   border: 2px solid #4f4f4f;
-  width: 70%;
+  width: 100%;
   display: flex;
   flex-flow: row wrap;
   background: lightgray;
@@ -25,11 +30,11 @@ figure img {
 figure p {
   position: relative;
   bottom: 2.9rem;
-  left: 12.4rem;
+  left: 11.4rem;
   background: white;
   border: 1px solid white;
   height: 1.5rem;
-  width: 2.5rem;
+  width: 3.5rem;
 }
 
 figure h3 {
@@ -77,6 +82,13 @@ figure h3 {
 
 .nav-bar button:hover {
   cursor: pointer;
+}
+
+
+.logo a{
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
 }
 
 /*Landing Page Styling*/
@@ -137,4 +149,94 @@ figure h3 {
 .shop-cta button:nth-child(2) a {
   color: white;
   text-decoration: none;
+}
+
+/*Owner-login-container*/
+
+.log-in-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.owner-log-in-card {
+  border: 1px solid #4f4f4f;
+  height: 50vh;
+  width: 40vh;
+  margin: 5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+  background: rgb(243, 251, 253);
+}
+
+.owner-log-in-card label {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  text-align: center;
+  line-height: 3rem;
+}
+
+.owner-log-in-card #submit-button {
+  margin: 2rem;
+  height: 1.5rem;
+  width: 10rem;
+  background: rgb(120, 219, 120);
+  border: none;
+  border-radius: 0.2rem;
+}
+
+.owner-log-in-card #submit-button:hover {
+  cursor: pointer;
+}
+
+
+/*Register New Owner Styles*/
+
+.new-owner-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.new-owner-card{
+  border: 1px solid #4f4f4f;
+  height: 50vh;
+  width: 40vh;
+  margin: 5rem;
+  margin-top: 1.6rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+  background: rgb(243, 251, 253);
+}
+
+.new-owner-card label {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  text-align: center;
+  line-height: 3rem;
+}
+
+.new-owner-card #new-owner-submit{
+  margin: 2rem;
+  height: 1.5rem;
+  width: 10rem;
+  background: rgb(120, 219, 120);
+  border: none;
+  border-radius: 0.2rem;
+}
+
+.new-owner-card #new-owner-submit:hover{
+  cursor: pointer;
 }

@@ -39,7 +39,9 @@ function App() {
     <>
       <div className="nav-bar-container">
         <div className="logo">
-          <h2>African Market Place</h2>
+          <Link to="/">
+            <h2>African Market Place</h2>
+          </Link>
         </div>
         <div className="nav-bar">
           <Link to="/login">Owner Login</Link>
@@ -56,7 +58,7 @@ function App() {
 
       <Route path="/register" component={RegisterOwner} />
       <PrivateRoute path="/shop/owner" component={OwnerAddItem} />
-      <PrivateRoute path="/shop/owner" component={ItemsList} />
+      {/* <PrivateRoute path="/shop/owner" component={ItemsList} /> */}
       <Route path="/shop" component={ItemsList} />
     </>
   );
