@@ -37,10 +37,17 @@ function App() {
   };
   return (
     <>
-      <div>
-        <Link to="/login">Owner Login</Link>
-        <Link to="/shop">Shop!</Link>
-        <button onClick={handleClickLogout}>Logout</button>
+      <div className="nav-bar-container">
+        <div className="logo">
+          <h2>African Market Place</h2>
+        </div>
+        <div className="nav-bar">
+          <Link to="/login">Owner Login</Link>
+          <p> | </p>
+          <Link to="/shop">Shop!</Link>
+          <p> | </p>
+          <button onClick={handleClickLogout}>Logout</button>
+        </div>
       </div>
 
       <Route exact path="/" component={LandingPage} />

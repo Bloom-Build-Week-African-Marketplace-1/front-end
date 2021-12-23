@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_URL from '../constants';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const ItemsList = props => {
@@ -18,13 +19,13 @@ const ItemsList = props => {
 
   useEffect(() => {
     axiosWithAuth
-      .get(`items`)
+      .get(`https://jsonplaceholder.typicode.com/photos?albumId=1`)
       .then(res => setItems(res.data))
       .catch(err => console.error(err));
   }, []);
 
   return (
-    <div>
+    <div className="list-container">
       <div className="main-list">
         {items.map(item => (
           <figure key={item.id}>
