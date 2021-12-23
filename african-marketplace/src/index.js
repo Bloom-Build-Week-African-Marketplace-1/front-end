@@ -17,10 +17,21 @@ import OwnerLogin from './components/OwnerLogin';
 import { PrivateRoute } from './components/PrivateRoute';
 import OwnerAddItem from './components/OwnerAddItem';
 
+// Amethyst doing redux stuff
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+import { reducer } from './state/reducers/index';
+
+const store = createStore(reducer, applyMiddleware(thunk, logger));
+
 ReactDOM.render(
   <Router>
     <React.StrictMode>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </React.StrictMode>
   </Router>,
   document.getElementById('root')
