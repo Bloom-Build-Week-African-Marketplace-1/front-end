@@ -3,6 +3,7 @@
 .list-container{
   width: 100%;
   height: 100vh;
+  margin-top: 1rem;
 }
 
 .main-list {
