@@ -37,10 +37,19 @@ function App() {
   };
   return (
     <>
-      <div>
-        <Link to="/login">Owner Login</Link>
-        <Link to="/shop">Shop!</Link>
-        <button onClick={handleClickLogout}>Logout</button>
+      <div className="nav-bar-container">
+        <div className="logo">
+          <Link to="/">
+            <h2>African Market Place</h2>
+          </Link>
+        </div>
+        <div className="nav-bar">
+          <Link to="/login">Owner Login</Link>
+          <p> | </p>
+          <Link to="/shop">Shop!</Link>
+          <p> | </p>
+          <button onClick={handleClickLogout}>Logout</button>
+        </div>
       </div>
 
       <Route exact path="/" component={LandingPage} />
@@ -49,7 +58,7 @@ function App() {
 
       <Route path="/register" component={RegisterOwner} />
       <PrivateRoute path="/shop/owner" component={OwnerAddItem} />
-      <PrivateRoute path="/shop/owner" component={ItemsList} />
+      {/* <PrivateRoute path="/shop/owner" component={ItemsList} /> */}
       <Route path="/shop" component={ItemsList} />
     </>
   );

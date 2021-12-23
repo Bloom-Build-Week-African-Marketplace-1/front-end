@@ -23,7 +23,7 @@ const RegisterOwner = () => {
     axios
       .post(`${API_URL}auth/register`, credentials)
       .then(resp => {
-        console.log(resp);
+        console.log(resp, 'Res from api');
         const password = resp.data.password;
         localStorage.setItem('password', password);
         push('/login');
@@ -33,8 +33,8 @@ const RegisterOwner = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className="new-owner-container">
+      <div className="new-owner-card">
         <h2>REGISTER NEW OWNER</h2>
         <form onSubmit={handleSubmit}>
           <label>
@@ -57,10 +57,11 @@ const RegisterOwner = () => {
             />
           </label>
 
-          <input type="submit" value="SUBMIT" />
+          <input type="submit" value="SUBMIT" id="new-owner-submit" />
         </form>
+        <p>Already have an account?</p>
+        <Link to="/login">Login</Link>
       </div>
-      <Link to="/login">Login</Link>
     </div>
   );
 };

@@ -63,10 +63,10 @@ const OwnerAddItem = () => {
   };
 
   return (
-    <div>
+    <div className="add-item-container">
       {!isAddingItem && <button onClick={handleClickAdd}>Add New Item</button>}
       {isAddingItem && (
-        <div>
+        <div className="add-item-card">
           <h2>ADD AN ITEM</h2>
           <button onClick={handleCancel}>X</button>
 
