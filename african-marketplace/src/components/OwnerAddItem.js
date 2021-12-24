@@ -1,48 +1,102 @@
 import React, { useState, useEffect } from 'react';
-import axiosWithAuth from '../utils/axiosWithAuth';
-import API_URL from '../constants';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 
-const OwnerAddItem = () => {
-  const initialItemInfo = {
+// Redux imports
+import { connect } from 'react-redux';
+import { addItem } from '../state/actions/index';
+
+const OwnerAddItem = props => {
+  const [newItem, setNewItem] = useState({
     category: '',
     description: '',
+    item_id: '',
     location: '',
     name: '',
-    price: 0,
-    user_id: 0,
-  };
+    price: '',
+    user_id: '',
+    url: '',
+  });
+  const { addItem } = props;
 
   const initialIsAddingItem = false;
 
-  const [itemInfo, setItemInfo] = useState(initialItemInfo);
+  // const [itemInfo, setItemInfo] = useState(initialItemInfo);
   const [isAddingItem, setIsAddingItem] = useState(initialIsAddingItem);
 
   useEffect(() => {
-    setItemInfo({ ...itemInfo, user_id: localStorage.getItem('user_id') });
+    setNewItem({ ...newItem, user_id: localStorage.getItem('user_id') });
   }, [isAddingItem]);
 
-  const { push } = useHistory();
+  // const { push } = useHistory();
+
+  // const handleChange = e => {
+  //   setItemInfo({
+  //     ...itemInfo,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+
+  // const handleClickAdd = e => {
+  //   e.preventDefault();
+  //   setIsAddingItem(true);
+  // };
+
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   axiosWithAuth
+  //     .post(`${API_URL}items`, itemInfo)
+  //     .then(resp => console.log(resp))
+  //     .catch(err => console.error(err));
+  //   setIsAddingItem(false);
+  // };
+
+  // const handleCancel = e => {
+  //   e.preventDefault();
+
+  //   setIsAddingItem(false);
+  // };
+
+  // const selectCategory = async e => {
+  //   setItemInfo(getNewCategory(e));
+  // };
+
+  // const getNewCategory = e => {
+  //   const newItemInfo = { ...itemInfo };
+  //   newItemInfo.category = e.target.value;
+  //   console.log(newItemInfo);
+  //   return newItemInfo;
+  // };
 
   const handleChange = e => {
-    setItemInfo({
-      ...itemInfo,
+    setNewItem({
+      ...newItem,
       [e.target.name]: e.target.value,
     });
   };
 
+  const addNewItem = e => {
+    e.preventDefault();
+
+    addItem({
+      ...newItem,
+    });
+    // setNewItem({
+    //   category: '',
+    // description: '',
+    // item_id: '',
+    // location: '',
+    // name: '',
+    // price: '',
+    // user_id: '',
+    // url: '',
+    // });
+  };
+
+  // ------------------------------------
+
   const handleClickAdd = e => {
     e.preventDefault();
     setIsAddingItem(true);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    axiosWithAuth
-      .post(`${API_URL}items`, itemInfo)
-      .then(resp => console.log(resp))
-      .catch(err => console.error(err));
-    setIsAddingItem(false);
   };
 
   const handleCancel = e => {
@@ -52,13 +106,12 @@ const OwnerAddItem = () => {
   };
 
   const selectCategory = async e => {
-    setItemInfo(getNewCategory(e));
+    setNewItem(getNewCategory(e));
   };
 
   const getNewCategory = e => {
-    const newItemInfo = { ...itemInfo };
+    const newItemInfo = { ...newItem };
     newItemInfo.category = e.target.value;
-    console.log(newItemInfo);
     return newItemInfo;
   };
 
@@ -70,14 +123,15 @@ const OwnerAddItem = () => {
           <h2>ADD AN ITEM</h2>
           <button onClick={handleCancel}>X</button>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={addNewItem}>
             <label>
               PRODUCT NAME
               <input
                 type="text"
-                value={itemInfo.name}
+                value={newItem.name}
                 onChange={handleChange}
                 name="name"
+                id="name"
               />
             </label>
 
@@ -85,7 +139,7 @@ const OwnerAddItem = () => {
               DESCRIPTION
               <input
                 type="text"
-                value={itemInfo.description}
+                value={newItem.description}
                 onChange={handleChange}
                 name="description"
               />
@@ -95,7 +149,7 @@ const OwnerAddItem = () => {
               PRICE
               <input
                 type="text"
-                value={itemInfo.price}
+                value={newItem.price}
                 onChange={handleChange}
                 name="price"
               />
@@ -105,7 +159,7 @@ const OwnerAddItem = () => {
               LOCATION
               <input
                 type="text"
-                value={itemInfo.location}
+                value={newItem.location}
                 onChange={handleChange}
                 name="location"
               />
@@ -113,10 +167,10 @@ const OwnerAddItem = () => {
             <label>
               CATEGORY
               <select
-                id={itemInfo.category}
+                id={newItem.category}
                 onChange={selectCategory}
-                name={itemInfo.category}
-                value={itemInfo.category}
+                name={newItem.category}
+                value={newItem.category}
               >
                 <option name="category" value="0">
                   SELECT CATEGORY:
@@ -146,4 +200,8 @@ const OwnerAddItem = () => {
   );
 };
 
-export default OwnerAddItem;
+const mapStateToProps = state => ({
+  items: state.itemReducer.items,
+});
+
+export default connect(mapStateToProps, { addItem })(OwnerAddItem);
