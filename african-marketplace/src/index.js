@@ -10,7 +10,7 @@ import {
 import '../src/styles.css';
 
 import { LandingPage } from './components/pages/Landing';
-import { LoadingComponent } from './components/common';
+// import { LoadingComponent } from './components/common';
 import ItemsList from './components/ItemsList';
 import RegisterOwner from './components/RegisterOwner';
 import OwnerLogin from './components/OwnerLogin';

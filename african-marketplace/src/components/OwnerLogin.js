@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import API_URL from '../constants';
-import { Link, useHistory, Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 const OwnerLogin = () => {
   const initialState = {
@@ -24,7 +24,6 @@ const OwnerLogin = () => {
     data = await getUserData();
     localStorage.setItem('token', data.token);
     localStorage.setItem('user_id', data.user_id);
-    //localStorage.setItem('userID', token);
   };
 
   const getUserData = () => {
