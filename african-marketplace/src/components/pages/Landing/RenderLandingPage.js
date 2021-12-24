@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 function RenderLandingPage(props) {
   return (
     <div className="landing-page">
-      <img src="/assets/AfricanMarketCover.jpg" />
+      <img
+        src="/assets/AfricanMarketCover.jpg"
+        alt="A bustling African marketplace"
+      />
       <div className="top-content">
         <div className="shop-cta">
           <h1>
